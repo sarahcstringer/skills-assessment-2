@@ -192,7 +192,18 @@ def sort_by_word_length(words):
         [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
     """
 
-    return []
+    word_lengths = {}
+
+    sorted_word_lengths = []
+
+    for word in words:
+        word_lengths[len(word)] = word_lengths.get(len(word), []) + [word]
+
+
+    for item, value in word_lengths.items():
+        sorted_word_lengths.append((item, value))
+
+    return sorted_word_lengths
 
 
 def get_sum_zero_pairs(numbers):
@@ -221,8 +232,28 @@ def get_sum_zero_pairs(numbers):
         >>> sort_pairs( get_sum_zero_pairs([1, 3, -1, 1, 1, 0]) )
         [[-1, 1], [0, 0]]
     """
+    
+    numbers_neg = set()
+    numbers_pos = set()
 
-    return []
+    for num in numbers:
+        if num < 0:
+            numbers_neg.add(abs(num))
+        elif num > 0:
+            numbers_pos.add(abs(num))
+        elif num == 0:
+            numbers_neg.add(num)
+            numbers_pos.add(num)
+
+    pairs = list(numbers_neg & numbers_pos)
+
+    return_pairs = []
+
+    for num in pairs:
+        return_pairs.append([num, -num])
+
+    return return_pairs
+
 
 
 def kids_game(names):
@@ -263,7 +294,19 @@ def kids_game(names):
     good solutions here will definitely require a dictionary.
     """
 
-    return []
+    words = {}
+    word_chain = [names.pop(0)]
+
+    for name in names:
+        words[name[0]] = words.get(name[0], []) + [name]
+    
+
+    while True:
+        last_letter = word_chain[-1][-1]
+        if last_letter in words:
+            word_chain.append(words.pop(last_letter)[0])
+        else:
+            return word_chain
 
 
 #####################################################################
