@@ -37,24 +37,27 @@ def top_chars(phrase):
         #add each string to the dictionary and increase count
         char_count[char] = char_count.get(char, 0) + 1
 
+    # get the count of each key in the dictionary
     values = char_count.values()
 
     top_char_values = [0]
 
+    # loop through the list of values. If a number in the list is greater than
+    # the top_char_values character, set that to equal the new top_char_values.
     for num in values:
         if num > top_char_values[0]:
             top_char_values = [num]
-        elif num == top_char_values[0]:
-            top_char_values.append(num)
 
-    top_char = set()
+    top_char = []
 
+    # loop through the key-value pairs and find the characters that match the
+    # top_char_values amount
     for key, value in char_count.items():
         for num in top_char_values:
             if num == value:
-                top_char.add(key)
+                top_char.append(key)
 
-    return sorted(list(top_char))
+    return sorted(top_char)
 
 
 def word_length_sorted(words):
@@ -72,16 +75,24 @@ def word_length_sorted(words):
         >>> word_length_sorted(["ok", "an", "apple", "a", "day"])
         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
     """
-
+    # create empty dictionary
     word_length = {}
 
+    # loop through the words in the list and create a key for each word length
+    # and add the words of that length as values to the key.
+    # If there are multiple words of the same length, store those as a list.
     for word in words:
         word_length[len(word)] = word_length.get(len(word), []) + [word]
 
+    # create an empty list   
     word_length_sort = []
+
+    # loop through the different key-value pairs in the dictionary and add them
+    # to a list. Sort lists of multiple words alphabetically
     for key, value in word_length.items():
         word_length_sort.append((key, sorted(value)))
 
+    # return a sorted list of tuples (sorted by word length)
     return sorted(word_length_sort)
 
 
