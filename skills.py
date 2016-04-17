@@ -73,7 +73,9 @@ def find_unique_common_items(items1, items2):
         [2]
     """
 
+    # use set math to find intersection of unique item
     union_items = set(items1) & set(items2)
+    # return as a list
     return list(union_items)
 
 
@@ -101,11 +103,13 @@ def count_words(phrase):
         >>> print_dict(count_words("Porcupine see, porcupine do."))
         {'Porcupine': 1, 'do.': 1, 'porcupine': 1, 'see,': 1}
     """
-
+    # separate string into list of words
     phrase = phrase.split()
 
+    # create empty dictionary
     word_count = {}
 
+    # count words and store as key-value pairs in dictionary
     for word in phrase:
         word_count[word] = word_count.get(word, 0) + 1
 
@@ -151,6 +155,9 @@ def translate_to_pirate_talk(phrase):
         'me swabbie be not a boy!'
     """
 
+    # note: updated Doctest b/c boy and man were changed in the Pirate dictionary
+
+    # create dictionary
     pirate_talk = {
                 'sir': 'matey',
                 'hotel': 'fleabag inn',
@@ -166,8 +173,11 @@ def translate_to_pirate_talk(phrase):
                 'my': 'me',
                 'is': 'be'}
 
+    # split the phrase into individual words
     phrase = phrase.split()
 
+    # loop through the list of words and check if word is in dictionary.
+    # if yes, substitute that word with the Pirate word.
     for i, word in enumerate(phrase):
         if word in pirate_talk:
             # here I tried to do word = pirate_talk[word], but it didn't work
@@ -175,6 +185,7 @@ def translate_to_pirate_talk(phrase):
             # element itself
             phrase[i] = pirate_talk[word]
 
+    # return the phrase as a string
     return " ".join(phrase)
 
 
@@ -196,14 +207,18 @@ def sort_by_word_length(words):
 
     sorted_word_lengths = []
 
+    # store the length of each word as a key and the word itself as a list
+    # for the value of that key
     for word in words:
         word_lengths[len(word)] = word_lengths.get(len(word), []) + [word]
 
-
+    # get a list of tuples of key-value pairs from the dictionary
     for item, value in word_lengths.items():
         sorted_word_lengths.append((item, value))
 
-    return sorted_word_lengths
+    # return a sorted final list (dictionaries are unordered so the keys might
+    # not be sorted when added to the list)
+    return sorted(sorted_word_lengths)
 
 
 def get_sum_zero_pairs(numbers):
@@ -236,19 +251,25 @@ def get_sum_zero_pairs(numbers):
     numbers_neg = set()
     numbers_pos = set()
 
+    # create a set of positive and a set of negative numbers in the list. Only
+    # need absolute value of the number.
     for num in numbers:
         if num < 0:
             numbers_neg.add(abs(num))
         elif num > 0:
             numbers_pos.add(abs(num))
+        # add zero to both lists
         elif num == 0:
             numbers_neg.add(num)
             numbers_pos.add(num)
 
+    # find the union of the lists, which would mean the number and its negative
+    # both appeared in the list of numbers
     pairs = list(numbers_neg & numbers_pos)
 
     return_pairs = []
 
+    # create a list of the numbers and their negatives that appeared in the list
     for num in pairs:
         return_pairs.append([num, -num])
 
@@ -295,14 +316,21 @@ def kids_game(names):
     """
 
     words = {}
+    # can only use each word once; pop items so that they're not reused
     word_chain = [names.pop(0)]
 
+    # iterate through the list of names and create a dictionary
+    # The key is the first letter of the word; values are the words that start
+    # with that letter
     for name in names:
         words[name[0]] = words.get(name[0], []) + [name]
     
-
+    # loop through and create a chain
     while True:
+        # find the last letter of the last word in the chain
         last_letter = word_chain[-1][-1]
+        # find the words that start with that letter and add the first one
+        # to the list.
         if last_letter in words:
             word_chain.append(words.pop(last_letter)[0])
         else:
