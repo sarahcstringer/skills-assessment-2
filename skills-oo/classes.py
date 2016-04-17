@@ -21,9 +21,12 @@ class Question(object):
         user_answer = raw_input("> ")
 
         if user_answer == self.correct_answer:
+            print "Correct."
+            print
             return True
         else:
             print "Incorrect. Correct answer: {}".format(self.correct_answer)
+            print
             return False
 
 
@@ -55,4 +58,35 @@ class Exam(object):
         total_incorrect = score[False]
         total_num_questions = score[True] + score[False]
 
-        print "Correct: {}. Incorrect: {}".format(total_correct, total_incorrect)
+        print "Total correct: {}. Total incorrect: {}".format(total_correct, 
+                                                    total_incorrect)
+        # print "Percentage correct: {:.2f}%".format(total_correct/total_num_questions)
+
+        return score
+
+
+# 
+
+def take_test(exam, student):
+    student.score = exam.administer()
+    return student.score
+
+
+def example():
+
+    exam = Exam('Exam Example')
+    
+    exam.add_question('What is the capital of California?', 'Sacramento')
+    exam.add_question('What is the capital of Ohio?', 'Columbus')
+    exam.add_question('What is the capital of Hawaii?', 'Honolulu')
+    exam.add_question('What is the capital of New Mexico?', 'Santa Fe')
+
+    student = Student('Sarah', 'Stringer', '7 Casa Way')
+
+    return [exam, student]
+
+
+exam, student = example()
+
+print take_test(exam, student)
+
