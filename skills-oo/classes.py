@@ -49,6 +49,8 @@ class Exam(object):
         
         score = {True: 0, False: 0}
 
+        question_list = self.questions
+
         for i in range(len(self.questions)):
             question = Question(self.questions[i][0], self.questions[i][1])
             score_question = question.ask_and_evaluate()
@@ -56,13 +58,20 @@ class Exam(object):
 
         total_correct = score[True]
         total_incorrect = score[False]
-        total_num_questions = score[True] + score[False]
 
         print "Total correct: {}. Total incorrect: {}".format(total_correct, 
                                                     total_incorrect)
-        # print "Percentage correct: {:.2f}%".format(total_correct/total_num_questions)
 
         return score
+
+class Quiz(Exam):
+
+    def administer(self):
+        score = super(Quiz, self).administer()
+        if (score[True] / (score[True] + score[False])) >= .5:
+            return True
+        else:
+            return False
 
 
 # 
