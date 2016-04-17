@@ -62,12 +62,15 @@ class Exam(object):
         print "Total correct: {}. Total incorrect: {}".format(total_correct, 
                                                     total_incorrect)
 
-        return score
+        return score[True]
 
 class Quiz(Exam):
 
     def administer(self):
+        """Administer quiz and return only True if passed, False if failed"""
+
         score = super(Quiz, self).administer()
+
         if (score[True] / (score[True] + score[False])) >= .5:
             return True
         else:
@@ -77,11 +80,14 @@ class Quiz(Exam):
 # 
 
 def take_test(exam, student):
+    """Administer test and assigns score to student."""
+
     student.score = exam.administer()
     return student.score
 
 
 def example():
+    """Create an example Exam"""
 
     exam = Exam('Exam Example')
     
@@ -92,10 +98,9 @@ def example():
 
     student = Student('Sarah', 'Stringer', '7 Casa Way')
 
-    return [exam, student]
+    score = take_test(exam, student)
 
+    return score
 
-exam, student = example()
-
-print take_test(exam, student)
+print example()
 

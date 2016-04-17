@@ -1,0 +1,41 @@
+1) What are the three main design advantages that object orientation can provide?
+
+Three main design advantages of object orientation are polymorphism, encapsulation and abstraction.
+
+Polymorphism allows for flexibility of code in multiple ways. First, polymorphism means that the code itself can adapt to different types of variables. In strongly typed langauges such as C, variables need to be of a set type and cannot change. In Python, a variable can be bound and rebound to values of different types, and the code itself can adapt to these changes.
+
+Specifically for classes, polymorphism also allows for methods to behave differently depending on the object that is passed as a parameter. Methods can be defined on a more abstract level and implemented according to the instance. For example, there could be a method defined for an AbstractPet class, and within each subclass (ex: dog, cat), that method can be adapted to fit the specifics of the subclass objects.
+
+Encapsulation ensures that data about objects and methods that can be used for those objects remain close to their source ("encapsulated" within it). It also means that values and methods are accessible within the scope of the object, but are not globally available unless called specifically in relation to the object using the dot operator. 
+
+Abstraction means that a user does not need to understand or know the intricacies of how classes work on a granular level in order to use class methods and store and retrieve data about instances. The individual steps of an operation are hidden and the user does not need to know how to perform each step in order to reach the desired goal.
+
+2) What is a class? 
+
+A class is a system of grouping data about objects and functions (called methods, if defined within a class) that can be applied to that type of object in one container. These data and methods can be accessed using the "." operator.
+
+
+3) What is an instance attribute?
+
+An instance attribute is an attribute that applies specifically to one instance or object of a class. This can be defined when an object is instantiated, during initialization. It can also be individually defined later, using the format: self.attribute = value.
+
+
+4) What is a method?
+
+A method is a function that can be used on a particular class of objects. It is defined within the scope of the class and can be called using the format: self.method(parameters).
+
+A method always takes "self" as the first parameter and can have additional parameters as well.
+
+
+5) What is an instance in object orientation?
+
+An instance is an object, or one particular case of a class.
+
+
+6) How is a class attribute different than an instance attribute? Give an example of when you might use each.
+
+Instance attributes are different than class attributes in that they are specific only to the instance, whereas class attributes apply generally to all objects of that class. If an instance attribute is defined, it takes precedence over class attributes. If no instance attribute is defined but a class attribute of the same name is, the class attribute will be returned.
+
+Someone could use a class attribute when one value characterizes most or all of the instances of that class and can be applied generally to every object -- for example, if there was a class of 9th grade students. The class attributes might be "grade = 9" and "school = 'School Name'", because those elements are common among students.
+
+An instance attribute would be used for specific data about that instance -- for example, the name of each individual student, their address and grades. These attributes can initialized using the class __init__ method, if each instance of this class is expected to have the same categories of individual characteristics. Other instance attributes can be defined later using additional methods or by individual assignation. 
