@@ -4,6 +4,7 @@
 dictionaries and sets.
 """
 
+# I didn't use any sets in this but did use dictionaries.
 
 def top_chars(phrase):
     """Find most common character(s) in string.
